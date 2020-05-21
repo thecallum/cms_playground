@@ -19,3 +19,6 @@ Route::get('/', function () {
 
 
 Route::get('content', 'ContentController@index');
+Route::get('content/create', 'ContentController@create');
+
+Route::post('content/create', 'ContentController@save');

@@ -14,6 +14,9 @@
 <h1>Content View</h1>
 
 
+<a href="/content/create/">Create</a>
+
+
 <div class="sidebar">
     <h2>Content Types</h2>
     <hr>
@@ -36,6 +39,7 @@
         <p>{{ $file['content'] }}</p>
     </div>
 @endforeach
+
 
 
 
