@@ -1,0 +1,14 @@
+{
+    "title": "Blog Posts",
+    "fields": {
+        "name": {
+            "type": "text"
+        },
+        "published": {
+            "type": "text"
+        },
+        "content": {
+            "type": "text"
+        }
+    }
+}
