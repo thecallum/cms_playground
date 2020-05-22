@@ -17,26 +17,12 @@
 <a href="/content/create/">Create</a>
 
 
-<div class="sidebar">
-    <h2>Content Types</h2>
-    <hr>
-
-<ul>
-    <li>Blog Post</li>
-    <li>Page</li>
-</ul>
-
-</div>
-
-
-<hr>
-
-
 @foreach($files as $file)
     <div class="post">
         <p>{{ $file['name'] }}</p>
         <p>{{ $file['published'] }}</p>
         <p>{{ $file['content'] }}</p>
+        <p><a href="/content/edit/{{ $file['file_name'] }}">Edit</a></p>
     </div>
 @endforeach
 

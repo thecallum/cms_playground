@@ -19,6 +19,9 @@ Route::get('/', function () {
 
 
 Route::get('content', 'ContentController@index');
+Route::get('content/edit/{id}', 'ContentController@edit');
+Route::patch('content/edit/{id}', 'ContentController@update');
+
 Route::get('content/create', 'ContentController@create');
 
 Route::post('content/create', 'ContentController@save');
