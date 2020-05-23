@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background: hsl(0, 50%, 50%);
+    height: 100px;
+}
+
+.header ul {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header li {
+    margin: 0 15px 0 0;
+    padding: 0;
+    display: block;
+}
+
+.header a {
+    color: #fff;
+}
