@@ -1,10 +1,7 @@
 {
-    "title": "blogpost",
+    "title": "page",
     "fields": {
         "name": {
-            "type": "text"
-        },
-        "published": {
             "type": "text"
         },
         "content": {

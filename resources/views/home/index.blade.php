@@ -2,11 +2,20 @@
 
 @section('content')
 
-    <h1>CMS Dashboard</h1>
+    <h1>Dashboard</h1>
+    <hr>
 
+    <h2>Content Types</h2>
+    <ul class="list-group">
 
-    <p>
-        <a href="/content/" class="btn btn-primary">View Content</a>
-    </p>
+        @foreach($models as $model)
+
+            <li class="list-group-item">
+                <a href="/content/{{ $model["title"] }}/">{{ $model["title"] }}</a>
+            </li>
+
+        @endforeach
+
+    </ul>
 
 @endsection

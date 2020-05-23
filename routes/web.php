@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', "HomeController@index");
 
-Route::resource('content','ContentController');
+Route::resource('content/{model}','ContentController');

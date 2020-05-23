@@ -2,9 +2,7 @@
 
 @section('content')
 
-
-<h1>Content</h1>
-
+<h1>{{ $model }}</h1>
 
 <p>
     <a href="/content/create/" class="btn btn-primary">Create</a>

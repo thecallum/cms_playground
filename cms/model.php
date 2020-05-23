@@ -3,26 +3,17 @@
 namespace CMS;
 
 class Model {
-
-    public static function Save($model)
+    public static function FindAll()
     {
-        $count = count(Model::ListFilePaths("blogpost"));
-        $position = $count + 1;
+        $files = Model::ListFilePaths();
 
-        $path = Model::GetPathFromId($position);
+        // $paths = array_map(function($path) {
+        //     return basename($path, ".json");
+        // }, $paths);
 
-        file_put_contents($path, json_encode($model, JSON_PRETTY_PRINT));
+        // return $paths;
 
-    }
 
-    private static function GetPathFromId($id)
-    {
-        return base_path() . "/cms/content/blogpost/". $id . ".json";
-    }
-
-    public static function Fetch()
-    {
-        $files = Model::ListFilePaths("blogpost");
         $file_contents = [];
 
         foreach($files as $file)
@@ -32,32 +23,13 @@ class Model {
         }
 
         return $file_contents;
-    }
 
-    public static function Single($id)
-    {
-        $path = Model::GetPathFromId($id);
-        $contents = Model::Read($path);
-        return $contents;
-    }
-
-    public static function Update($model, $id)
-    {
-        $path = Model::GetPathFromId($id);
-
-        file_put_contents($path, json_encode($model, JSON_PRETTY_PRINT));
 
     }
 
-    public static function Delete($id)
+    private static function ListFilePaths()
     {
-        $path = Model::GetPathFromId($id);
-        unlink($path);
-    }
-
-    private static function ListFilePaths($model)
-    {
-        $directory_path = base_path() . "/cms/content/" . $model . "/*.json";
+        $directory_path = base_path() . "/cms/models/*.json";
         $files = glob($directory_path);
 
         return $files;
@@ -67,8 +39,7 @@ class Model {
     {
         $contents = file_get_contents($path);
 
-        $file_name = array_slice(explode("/", $path), -1)[0];
-        $file_name = explode(".", $file_name)[0];
+        $file_name = basename($path, ".json");
 
         $json = json_decode($contents, true); 
         

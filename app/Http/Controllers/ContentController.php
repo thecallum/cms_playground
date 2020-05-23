@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use CMS\Content;
 use CMS\Model;
-
-
 
 class ContentController extends Controller
 {
-    public function index()
+    public function index($model)
     {
-        $files = Model::Fetch();
+        $files = Content::Fetch($model);
+        if ($files == null) abort(404);
 
-        return view("content.index", ["files" => $files]);
+        return view("content.index", [
+            "files" => $files,
+            "model" => $model  
+        ]);
     }
 
     public function create()
@@ -29,14 +32,14 @@ class ContentController extends Controller
             "content" => $request->input("content")        
         ];
 
-        Model::Save($model);
+        Content::Save($model);
 
         return Redirect('/content/');
     }
 
     public function edit($id)
     {
-        $model =  Model::Single($id);
+        $model =  Content::Single($id);
 
         return view("content.edit", [
             "page" => $model
@@ -53,14 +56,14 @@ class ContentController extends Controller
             "file_name" => $id
         ];
 
-        Model::Update($model, $id);
+        Content::Update($model, $id);
 
         return redirect("/content/" . $id . "/edit/");
     }
 
     public function destroy($id)
     {
-        Model::Delete($id);
+        Content::Delete($id);
 
         return redirect("/content/");
     }
