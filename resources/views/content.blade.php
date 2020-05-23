@@ -1,31 +1,32 @@
-<style>
-    .sidebar {
-        background: hsl(80, 90%, 70%);
-        padding: 30px;
-    }
+@extends('layout')
 
-    .post {
-        padding: 30px;
-        background: lightblue;
-        margin: 15px 0;
-    }
-</style>
-
-<h1>Content View</h1>
+@section('content')
 
 
-<a href="/content/create/">Create</a>
+<h1>Content</h1>
 
 
-@foreach($files as $file)
-    <div class="post">
-        <p>{{ $file['name'] }}</p>
-        <p>{{ $file['published'] }}</p>
-        <p>{{ $file['content'] }}</p>
-        <p><a href="/content/edit/{{ $file['file_name'] }}">Edit</a></p>
-    </div>
-@endforeach
+<p>
+    <a href="/content/create/" class="btn btn-primary">Create</a>
+</p>
 
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Published</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach($files as $file)
+        <tr>
+            <td>{{ $file['name'] }}</td>
+            <td>{{ $file['published'] }}</td>
+            <td><a href="/content/edit/{{ $file['file_name'] }}">Edit</a></td>
+        </tr>
+    @endforeach
+    </tbody>
+</table>
 
-
-
+@endsection

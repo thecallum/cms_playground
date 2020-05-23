@@ -1,24 +1,29 @@
-<h1>Create</h1>
+@extends('layout')
 
+@section('content')
+    <h1>Edit</h1>
 
+    <form action="/content/edit/{{ $page['file_name'] }}" method="post">
 
-<form action="/content/edit/{{ $page['file_name'] }}" method="post">
+        @csrf
 
-    @csrf
+        @method("patch")
 
-    @method("patch")
+        <div class="form-group">
+            <label for="name-input">Name</label>
+            <input type="text" name="name" class="form-control" id="name-input" value="{{ $page['name'] }}">
+        </div>
 
-    <p>Name: 
-        <input type="text" name="name" value="{{ $page['name'] }}">
-    </p>
+        <div class="form-group">
+            <label for="published-input">Published</label>
+            <input type="text" name="published" class="form-control" id="published-input" value="{{ $page['published'] }}">
+        </div>
 
-    <p>Published: 
-        <input type="text" name="published" value="{{ $page['published'] }}">
-    </p>
+        <div class="form-group">
+            <label for="content-input">Content</label>
+            <input type="text" name="content" class="form-control" id="content-input" value="{{ $page['content'] }}">
+        </div>
 
-    <p>Content: 
-        <input type="text" name="content" value="{{ $page['content'] }}">
-    </p>
-
-    <button type="submit">Submit</button>
-</form>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+@endsection
