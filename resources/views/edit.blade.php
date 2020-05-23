@@ -26,4 +26,14 @@
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+
+    <form action="/content/{{ $page['file_name'] }}/" method="post">
+        @csrf
+
+        @method("delete")
+
+        <p style="margin-top: 30px;">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </p>
+    </form>
 @endsection

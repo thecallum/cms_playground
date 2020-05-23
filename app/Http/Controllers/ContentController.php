@@ -54,6 +54,13 @@ class Model {
 
     }
 
+    public static function Delete($id)
+    {
+        $path = base_path() . "/cms/content/blogpost/". $id . ".json";
+
+        unlink($path);
+    }
+
     private static function ListFilePaths($model)
     {
         $directory_path = base_path() . "/cms/content/" . $model . "/*.json";
@@ -134,6 +141,8 @@ class ContentController extends Controller
 
     public function destroy($id)
     {
-        //
+        Model::Delete($id);
+
+        return redirect("/content/");
     }
 }
