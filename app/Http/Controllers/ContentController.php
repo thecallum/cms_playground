@@ -13,12 +13,12 @@ class ContentController extends Controller
     {
         $files = Model::Fetch();
 
-        return view("content", ["files" => $files]);
+        return view("content.index", ["files" => $files]);
     }
 
     public function create()
     {
-        return view("create");
+        return view("content.create");
     }
 
     public function store(Request $request)
@@ -38,7 +38,7 @@ class ContentController extends Controller
     {
         $model =  Model::Single($id);
 
-        return view("edit", [
+        return view("content.edit", [
             "page" => $model
         ]);
     }
