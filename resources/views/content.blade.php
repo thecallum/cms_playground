@@ -23,7 +23,7 @@
         <tr>
             <td>{{ $file['name'] }}</td>
             <td>{{ $file['published'] }}</td>
-            <td><a href="/content/edit/{{ $file['file_name'] }}">Edit</a></td>
+            <td><a href="/content/{{ $file['file_name'] }}/edit/">Edit</a></td>
         </tr>
     @endforeach
     </tbody>

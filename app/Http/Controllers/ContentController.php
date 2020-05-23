@@ -83,7 +83,7 @@ class Model {
 
 class ContentController extends Controller
 {
-    public function index() 
+    public function index()
     {
         $files = Model::Fetch();
 
@@ -95,20 +95,31 @@ class ContentController extends Controller
         return view("create");
     }
 
+    public function store(Request $request)
+    {
+        $model = [
+            "name" => $request->input("name"),
+            "published" => $request->input("published"),
+            "content" => $request->input("content")        
+        ];
+
+        Model::Save($model);
+
+        return Redirect('/content/');
+    }
+
     public function edit($id)
     {
         $model =  Model::Single($id);
 
-
         return view("edit", [
             "page" => $model
         ]);
-
-    
     }
 
     public function update(Request $request, $id)
     {
+        
         $model = [
             "name" => $request->input("name"),
             "published" => $request->input("published"),
@@ -118,24 +129,11 @@ class ContentController extends Controller
 
         Model::Update($model, $id);
 
-        return view("edit", [
-            "page" => $model
-        ]);
+        return redirect("/content/" . $id . "/edit/");
     }
 
-    public function save(Request $request)
+    public function destroy($id)
     {
-        $model = [
-            "name" => $request->input("name"),
-            "published" => $request->input("published"),
-            "content" => $request->input("content"),
-            "file_name" => $id
-        ];
-
-        Model::Save($model);
-
-        return Redirect('/content/');
-
-        //dd($request->input("name"));
+        //
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
     <h1>Edit</h1>
 
-    <form action="/content/edit/{{ $page['file_name'] }}" method="post">
+    <form action="/content/{{ $page['file_name'] }}/" method="post">
 
         @csrf
 

@@ -3,7 +3,7 @@
 @section('content')
     <h1>Create</h1>
 
-    <form action="/content/create" method="post">
+    <form action="/content/" method="post">
 
         @csrf
 
