@@ -4,26 +4,28 @@ namespace CMS;
 
 class Content {
 
-    public static function Save($Content)
+    public static function Save($content, $modelId)
     {
-        $count = count(Content::ListFilePaths("blogpost"));
+        $count = count(Content::ListFilePaths($modelId));
         $position = $count + 1;
 
-        $path = Content::GetPathFromId($position);
+        $path = Content::GetPathFromId($position, $modelId);
 
-        file_put_contents($path, json_encode($Content, JSON_PRETTY_PRINT));
+        file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
 
     }
 
-    private static function GetPathFromId($id)
+    private static function GetPathFromId($id, $modelId)
     {
-        return base_path() . "/cms/content/blogpost/". $id . ".json";
+        return base_path() . "/cms/content/" . $modelId . "/" . $id . ".json";
     }
 
     public static function Fetch($model)
     {
+    
         $files = Content::ListFilePaths($model);
-        if (count($files) == 0) return null;
+
+        if (count($files) == 0) return [];
 
         $file_contents = [];
 
@@ -36,30 +38,33 @@ class Content {
         return $file_contents;
     }
 
-    public static function Single($id)
+    public static function Single($id, $modelId)
     {
-        $path = Content::GetPathFromId($id);
+        $path = Content::GetPathFromId($id, $modelId);
         $contents = Content::Read($path);
         return $contents;
     }
 
-    public static function Update($Content, $id)
+    public static function Update($content, $id, $modelId)
     {
-        $path = Content::GetPathFromId($id);
+        $path = Content::GetPathFromId($id, $modelId);
 
-        file_put_contents($path, json_encode($Content, JSON_PRETTY_PRINT));
-
+        file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
     }
 
     public static function Delete($id)
     {
-        $path = Content::GetPathFromId($id);
+        $path = Content::GetPathFromId($id, $modelId);
         unlink($path);
     }
 
-    private static function ListFilePaths($Content)
+    private static function ListFilePaths($model)
     {
-        $directory_path = base_path() . "/cms/content/" . $Content . "/*.json";
+
+        $directory_path = base_path() . "/cms/content/" . $model . "/*.json";
+
+        // dd($model);
+
         $files = glob($directory_path);
 
         return $files;

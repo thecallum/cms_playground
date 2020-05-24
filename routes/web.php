@@ -15,4 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', "HomeController@index");
 
-Route::resource('content/{model}','ContentController');
+Route::group(["prefix" => "content/{modelId}"], function() {
+    Route::get("/", "ContentController@index");
+    Route::post("/", "ContentController@store");
+    
+    Route::get("create/", "ContentController@create");
+    
+    Route::get("{id}/", "ContentController@show");
+    Route::put("{id}/", "ContentController@update");
+    Route::patch("{id}/", "ContentController@update");
+    Route::delete("{id}/", "ContentController@destroy");
+    
+    Route::get("{id}/edit/", "ContentController@edit");
+});
+

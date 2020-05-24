@@ -27,6 +27,14 @@ class Model {
 
     }
 
+    public static function Find($model)
+    {
+        $path = base_path() . "/cms/models/" . $model . ".json";
+        $contents = Model::Read($path);
+        
+        return $contents;
+    }
+
     private static function ListFilePaths()
     {
         $directory_path = base_path() . "/cms/models/*.json";

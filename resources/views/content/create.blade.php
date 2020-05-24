@@ -3,7 +3,7 @@
 @section('content')
     <h1>Create</h1>
 
-    <form action="/content/" method="post">
+    <form action="/content/{{ $model }}" method="post">
 
         @csrf
 

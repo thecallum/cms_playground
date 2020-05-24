@@ -8,23 +8,26 @@ use CMS\Model;
 
 class ContentController extends Controller
 {
-    public function index($model)
+    public function index($modelId)
     {
-        $files = Content::Fetch($model);
-        if ($files == null) abort(404);
+        $modelData = Model::Find($modelId);
+        $files = Content::Fetch($modelId);
 
         return view("content.index", [
             "files" => $files,
-            "model" => $model  
+            "title" => $modelData["title"],
+            "model" => $modelId
         ]);
     }
 
-    public function create()
+    public function create($modelId)
     {
-        return view("content.create");
+        return view("content.create", [
+            "model" => $modelId
+        ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $modelId)
     {
         $model = [
             "name" => $request->input("name"),
@@ -32,23 +35,23 @@ class ContentController extends Controller
             "content" => $request->input("content")        
         ];
 
-        Content::Save($model);
+        Content::Save($model, $modelId);
 
-        return Redirect('/content/');
+        return Redirect('/content/' . $modelId);
     }
 
-    public function edit($id)
+    public function edit($modelId, $id)
     {
-        $model =  Content::Single($id);
+        $model =  Content::Single($id, $modelId);
 
         return view("content.edit", [
-            "page" => $model
+            "page" => $model,
+            "model" => $modelId
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $modelId, $id)
     {
-        
         $model = [
             "name" => $request->input("name"),
             "published" => $request->input("published"),
@@ -56,15 +59,15 @@ class ContentController extends Controller
             "file_name" => $id
         ];
 
-        Content::Update($model, $id);
+        Content::Update($model, $id, $modelId);
 
-        return redirect("/content/" . $id . "/edit/");
+        return redirect("/content/" . $modelId . "/" . $id . "/edit/");
     }
 
-    public function destroy($id)
+    public function destroy($modelId, $id)
     {
-        Content::Delete($id);
+        Content::Delete($id, $modelId);
 
-        return redirect("/content/");
+        return redirect("/content/" . $modelId);
     }
 }

@@ -3,10 +3,8 @@
 @section('content')
     <h1>Edit</h1>
 
-    <form action="/content/{{ $page['file_name'] }}/" method="post">
-
+    <form action="/content/{{ $model }}/{{ $page['file_name'] }}/" method="post">
         @csrf
-
         @method("patch")
 
         <div class="form-group">
@@ -24,12 +22,11 @@
             <input type="text" name="content" class="form-control" id="content-input" value="{{ $page['content'] }}">
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Update</button>
     </form>
 
-    <form action="/content/{{ $page['file_name'] }}/" method="post">
+    <form action="/content/{{ $model }}/{{ $page['file_name'] }}/" method="post">
         @csrf
-
         @method("delete")
 
         <p style="margin-top: 30px;">
