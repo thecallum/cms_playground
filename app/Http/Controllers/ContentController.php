@@ -10,13 +10,13 @@ class ContentController extends Controller
 {
     public function index($modelId)
     {
-        $model = Model::Find($modelId);
+        $schema = Model::Find($modelId);
         $files = Content::Fetch($modelId);
 
         return view("content.index", [
             "files" => $files,
-            "title" => $model["title"],
-            "model" => $modelId
+            "model" => $modelId,
+            "schema" => $schema,
         ]);
     }
 
