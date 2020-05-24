@@ -4,6 +4,16 @@
 @section('content')
     <h1>Edit</h1>
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     {{-- <pre>@json($schema, JSON_PRETTY_PRINT)</pre> --}}
 
     <form action="/content/{{ $model }}/{{ $page['file_name'] }}/" method="post">
@@ -18,7 +28,7 @@
                     name="{{ $field }}" 
                     class="form-control" 
                     id="{{ $field }}-input" 
-                    value="{{ $page[$field] }}"
+                    value="{{ old($field) ?? $page[$field] }}"
                 >
             </div>
         @endforeach

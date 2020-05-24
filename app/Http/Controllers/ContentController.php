@@ -32,13 +32,10 @@ class ContentController extends Controller
 
     public function store(Request $request, $modelId)
     {
-        $model = [
-            "name" => $request->input("name"),
-            "published" => $request->input("published"),
-            "content" => $request->input("content")        
-        ];
+        $validationObject = Model::GetValidationObject($modelId);
+        $validatedData = $request->validate($validationObject);
 
-        Content::Save($model, $modelId);
+        Content::Save($validatedData, $modelId);
 
         return Redirect('/content/' . $modelId);
     }
@@ -57,14 +54,10 @@ class ContentController extends Controller
 
     public function update(Request $request, $modelId, $id)
     {
-        $model = [
-            "name" => $request->input("name"),
-            "published" => $request->input("published"),
-            "content" => $request->input("content"),
-            "file_name" => $id
-        ];
+        $validationObject = Model::GetValidationObject($modelId);
+        $validatedData = $request->validate($validationObject);
 
-        Content::Update($model, $id, $modelId);
+        Content::Update($validatedData, $id, $modelId);
 
         return redirect("/content/" . $modelId . "/" . $id . "/edit/");
     }

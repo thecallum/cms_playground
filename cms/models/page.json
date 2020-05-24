@@ -2,10 +2,12 @@
     "title": "page",
     "fields": {
         "name": {
-            "type": "text"
+            "type": "text",
+            "validation": "required|min:3|max:255"
         },
         "content": {
-            "type": "text"
+            "type": "text",
+            "validation": "required|min:3|max:255"
         }
     }
 }

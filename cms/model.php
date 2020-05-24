@@ -7,13 +7,6 @@ class Model {
     {
         $files = Model::ListFilePaths();
 
-        // $paths = array_map(function($path) {
-        //     return basename($path, ".json");
-        // }, $paths);
-
-        // return $paths;
-
-
         $file_contents = [];
 
         foreach($files as $file)
@@ -23,8 +16,6 @@ class Model {
         }
 
         return $file_contents;
-
-
     }
 
     public static function Find($model)
@@ -33,6 +24,19 @@ class Model {
         $contents = Model::Read($path);
         
         return $contents;
+    }
+
+    public static function GetValidationObject($modelId)
+    {
+        $schema = Model::Find($modelId);
+        $validationObject = [];
+
+        foreach($schema["fields"] as $field => $properties)
+        {
+            $validationObject[$field] = $properties["validation"];
+        }
+
+        return $validationObject;
     }
 
     private static function ListFilePaths()

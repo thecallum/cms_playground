@@ -2,13 +2,16 @@
     "title": "blogpost",
     "fields": {
         "name": {
-            "type": "text"
+            "type": "text",
+            "validation": "required|min:3|max:255"
         },
         "published": {
-            "type": "text"
+            "type": "text",
+            "validation": "required|date_format:d/m/Y"
         },
         "content": {
-            "type": "text"
+            "type": "text",
+            "validation": "required|min:3|max:255"
         }
     }
 }

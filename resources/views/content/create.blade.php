@@ -5,6 +5,16 @@
 
     {{-- <pre>@json($schema, JSON_PRETTY_PRINT)</pre> --}}
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="/content/{{ $model }}" method="post">
 
         @csrf
@@ -17,6 +27,7 @@
                     name="{{ $field }}" 
                     class="form-control" 
                     id="{{ $field }}-input"
+                    value={{ old($field) }}
                 >
             </div>
         @endforeach
