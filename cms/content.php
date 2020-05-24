@@ -52,7 +52,7 @@ class Content {
         file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
     }
 
-    public static function Delete($id)
+    public static function Delete($id, $modelId)
     {
         $path = Content::GetPathFromId($id, $modelId);
         unlink($path);
