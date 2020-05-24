@@ -3,25 +3,23 @@
 @section('content')
     <h1>Create</h1>
 
+    {{-- <pre>@json($schema, JSON_PRETTY_PRINT)</pre> --}}
+
     <form action="/content/{{ $model }}" method="post">
 
         @csrf
 
-        <div class="form-group">
-            <label for="name-input">Name</label>
-            <input type="text" name="name" class="form-control" id="name-input">
-        </div>
-
-        <div class="form-group">
-            <label for="published-input">Published</label>
-            <input type="text" name="published" class="form-control" id="published-input">
-        </div>
-
-        <div class="form-group">
-            <label for="content-input">Content</label>
-            <input type="text" name="content" class="form-control" id="content-input">
-        </div>
-
+        @foreach($schema["fields"] as $field => $properties)
+            <div class="form-group">
+                <label for="{{ $field }}-input">{{ $field }}</label>
+                <input 
+                    type="text" 
+                    name="{{ $field }}" 
+                    class="form-control" 
+                    id="{{ $field }}-input"
+                >
+            </div>
+        @endforeach
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @endsection

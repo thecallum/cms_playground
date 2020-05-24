@@ -10,20 +10,23 @@ class ContentController extends Controller
 {
     public function index($modelId)
     {
-        $modelData = Model::Find($modelId);
+        $model = Model::Find($modelId);
         $files = Content::Fetch($modelId);
 
         return view("content.index", [
             "files" => $files,
-            "title" => $modelData["title"],
+            "title" => $model["title"],
             "model" => $modelId
         ]);
     }
 
     public function create($modelId)
     {
+        $model = Model::Find($modelId);
+
         return view("content.create", [
-            "model" => $modelId
+            "model" => $modelId,
+            "schema" => $model
         ]);
     }
 
@@ -43,10 +46,12 @@ class ContentController extends Controller
     public function edit($modelId, $id)
     {
         $model =  Content::Single($id, $modelId);
+        $schema = Model::Find($modelId);
 
         return view("content.edit", [
             "page" => $model,
-            "model" => $modelId
+            "model" => $modelId,
+            "schema" => $schema
         ]);
     }
 
